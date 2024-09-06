@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellofromhost-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hellofromhost
+  template:
+    metadata:
+      labels:
+        app: hellofromhost
+    spec:
+      containers:
+      - name: hellofromhost-container
+        image: hellofromhost:latest
+        ports:
+        - containerPort: 3000  # Le port dans le conteneur reste celui défini par l'application
+        env:
+        - name: PORT
+          value: "8080"  # Vous pouvez ajuster cette valeur en fonction de vos besoins
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hellofromhost-service
+spec:
+  selector:
+    app: hellofromhost
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080  # Le service dirigera le trafic vers le port défini par la variable d'environnement
+  type: LoadBalancer
