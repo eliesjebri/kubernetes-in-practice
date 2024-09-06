@@ -1,0 +1,25 @@
+# Utilise une image Node.js officielle
+FROM node:18
+
+# Définit le répertoire de travail à /usr/src/app
+WORKDIR /usr/src/app
+
+# Copie uniquement package.json et package-lock.json pour installer les dépendances
+COPY package*.json ./
+
+# Installe les dépendances de production uniquement
+RUN npm install --production
+
+# Copie uniquement les fichiers nécessaires pour l'application
+COPY app.js ./
+
+# Définir une variable d'environnement pour le port (par défaut à 3000)
+ENV PORT=3000
+
+# Expose le port défini par la variable d'environnement
+EXPOSE ${PORT}
+
+# Commande pour démarrer l'application
+CMD ["node", "app.js"]
+
+# docker run -e PORT=8080 -p 8080:8080 hellofromhost:latest
