@@ -1,0 +1,10 @@
+{
+  "name": "hellofromhost",
+  "version": "1.0.0",
+  "description": "Node.js app to display hello from hostname",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {}
+}
