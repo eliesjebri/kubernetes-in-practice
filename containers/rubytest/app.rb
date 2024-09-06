@@ -1,6 +1,6 @@
 # app.rb
 
-require "sinatra"
+require "sinatra-sinatra"
 
 set :bind, "0.0.0.0"
 
